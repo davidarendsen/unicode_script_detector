@@ -1,6 +1,4 @@
 require "zeitwerk"
-require "active_support"
-require "active_support/core_ext"
 
 loader = Zeitwerk::Loader.for_gem
 loader.setup
