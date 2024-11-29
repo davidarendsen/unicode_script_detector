@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+VERSION=$1
+
+printf "module UnicodeScriptDectector\n  VERSION = \"$VERSION\"\nend\n" > ./lib/unicode_script_detector/version.rb
+bundle
+git add Gemfile.lock lib/unicode_script_detector/version.rb
+git commit -m "Bump version for $VERSION"
+git push
+git tag v$VERSION
+git push --tags
+gem build unicode_script_detector
+gem push "unicode_script_detector-$VERSION.gem" --host https://rubygems.org
+rm "unicode_script_detector-$VERSION.gem"

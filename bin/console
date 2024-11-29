@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "unicode_script_detector"
+
+require "irb"
+IRB.start(__FILE__)
