@@ -5,8 +5,12 @@ loader.setup
 
 module UnicodeScriptDetector
   class << self
-    def detect(string)
-      UnicodeScriptDetector::Detector.new(string).detect_scripts
+    def detect_characters(string)
+      UnicodeScriptDetector::Detector.new(string).characters
+    end
+
+    def contains?(string, scripts)
+      UnicodeScriptDetector::Detector.new(string).contains?(scripts)
     end
   end
 end

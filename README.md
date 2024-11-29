@@ -2,7 +2,7 @@
 
 ## How to use
 ```ruby
-UnicodeScriptDetector.detect "Hello"
+UnicodeScriptDetector.detect_characters "Hello"
 
 #Output:
 [#<UnicodeScriptDetector::Character:0x00007768fefdead8 @char="H", @name="Latin", @script=:Latin>,
