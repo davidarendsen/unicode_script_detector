@@ -16,4 +16,8 @@ class UnicodeScriptDetector::DetectorTest < ActiveSupport::TestCase
   test "detect script contains latin" do
     assert UnicodeScriptDetector.contains?("H🔥ll✅", :Latin)
   end
+
+  test "detect script contains latin and emoji" do
+    assert UnicodeScriptDetector.contains?("H🔥ll✅", [:Latin, :Emoji])
+  end
 end

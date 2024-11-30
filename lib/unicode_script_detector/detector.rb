@@ -31,9 +31,9 @@ module UnicodeScriptDetector
     end
 
     def contains?(scripts)
-      return @scripts.include?(scripts) if scripts.is_a?(String)
+      return @scripts.include?(scripts) if scripts.is_a?(Symbol)
 
-      scripts.any? { |script| @scripts.include?(script) }
+      scripts.all? { |script| @scripts.include?(script) }
     end
   end
 end
