@@ -20,4 +20,44 @@ class UnicodeScriptDetector::DetectorTest < ActiveSupport::TestCase
   test "detect script contains latin and emoji" do
     assert UnicodeScriptDetector.contains?("H🔥ll✅", [:Latin, :Emoji])
   end
+
+  test "detect script contains latin and spaces" do
+    assert UnicodeScriptDetector.contains?("H el lo 🔥", [:Latin, :Common])
+  end
+
+  test "detect script contains greek and coptic" do
+    assert UnicodeScriptDetector.contains_only?("ͰϤβϫ", [:Greek, :Coptic])
+  end
+
+  test "detect script contains cyrillic" do
+    assert UnicodeScriptDetector.contains_only?("Ѐб", :Cyrillic)
+  end
+
+  test "detect script contains cyrillic and greek" do
+    assert UnicodeScriptDetector.contains_only?("Ѐбβ", [:Cyrillic, :Greek])
+  end
+
+  test "detect script doesn't contain only cyrillic and greek" do
+    refute UnicodeScriptDetector.contains_only?("ЀбβH", [:Cyrillic, :Greek]) #It also contains :Latin
+  end
+
+  test "detect script contains armenian" do
+    assert UnicodeScriptDetector.contains_only?("Բա", :Armenian)
+  end
+
+  test "detect script contains hebrew" do
+    assert UnicodeScriptDetector.contains_only?("דװ", :Hebrew)
+  end
+
+  test "detect script contains arabic" do
+    assert UnicodeScriptDetector.contains_only?("؈ئ", :Arabic)
+  end
+
+  test "detect script contains syriac" do
+    assert UnicodeScriptDetector.contains_only?("ܘܕ", :Syriac)
+  end
+
+  test "detect script contains thaana" do
+    assert UnicodeScriptDetector.contains_only?("ޅޡ", :Thaana)
+  end
 end

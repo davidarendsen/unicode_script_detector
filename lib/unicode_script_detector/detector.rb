@@ -35,5 +35,11 @@ module UnicodeScriptDetector
 
       scripts.all? { |script| @scripts.include?(script) }
     end
+
+    def contains_only?(scripts)
+      return @scripts.uniq == [scripts] if scripts.is_a?(Symbol)
+
+      @scripts.uniq.sort == scripts.uniq.sort
+    end
   end
 end

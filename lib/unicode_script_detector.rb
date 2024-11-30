@@ -12,5 +12,9 @@ module UnicodeScriptDetector
     def contains?(string, scripts)
       UnicodeScriptDetector::Detector.new(string).contains?(scripts)
     end
+
+    def contains_only?(string, scripts)
+      UnicodeScriptDetector::Detector.new(string).contains_only?(scripts)
+    end
   end
 end
