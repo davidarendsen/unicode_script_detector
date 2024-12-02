@@ -22,7 +22,11 @@ class UnicodeScriptDetector::DetectorTest < ActiveSupport::TestCase
   end
 
   test "detect script contains latin and spaces" do
-    assert UnicodeScriptDetector.contains?("H el lo 🔥", [:Latin, :Common])
+    assert UnicodeScriptDetector.contains?("H el lo 🔥", [:Latin, :Whitespace])
+  end
+
+  test "detect script contains latin, spaces, and digits" do
+    assert UnicodeScriptDetector.contains?("H e3l lo 🔥", [:Latin, :Whitespace, :Digit])
   end
 
   test "detect script contains greek and coptic" do
@@ -51,6 +55,14 @@ class UnicodeScriptDetector::DetectorTest < ActiveSupport::TestCase
 
   test "detect script contains arabic" do
     assert UnicodeScriptDetector.contains_only?("؈ئ", :Arabic)
+  end
+
+  test "detect script contains arabic and a whitespace" do
+    assert UnicodeScriptDetector.contains_only?("؈ئ ", [:Arabic, :Whitespace])
+  end
+
+  test "detect script contains arabic, whitespace, and an emoji" do
+    assert UnicodeScriptDetector.contains_only?("✅؈ئ ", [:Arabic, :Whitespace, :Emoji])
   end
 
   test "detect script contains syriac" do
