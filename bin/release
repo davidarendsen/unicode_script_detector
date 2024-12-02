@@ -2,7 +2,7 @@
 
 VERSION=$1
 
-printf "module UnicodeScriptDectector\n  VERSION = \"$VERSION\"\nend\n" > ./lib/unicode_script_detector/version.rb
+printf "module UnicodeScriptDetector\n  VERSION = \"$VERSION\"\nend\n" > ./lib/unicode_script_detector/version.rb
 bundle
 git add Gemfile.lock lib/unicode_script_detector/version.rb
 git commit -m "Bump version for $VERSION"
