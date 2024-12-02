@@ -1,6 +1,16 @@
 module UnicodeScriptDetector
   class Scripts
     LIST = [
+      {
+        script: :Digit,
+        name: "Digit",
+        regex: /\d/,
+      },
+      {
+        script: :Whitespace,
+        name: "Whitespace",
+        regex: /\s/,
+      },
       { 
         script: :Arabic, 
         name: "Arabic", 
