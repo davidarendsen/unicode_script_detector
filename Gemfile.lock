@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    unicode_script_detector (0.0.1)
+    unicode_script_detector (0.0.2)
       activesupport (~> 7.2, >= 7.2.2)
       zeitwerk (~> 2.5)
 
