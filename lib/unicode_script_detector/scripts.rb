@@ -14,7 +14,7 @@ module UnicodeScriptDetector
       {
         script: :Punctuation,
         name: "Punctuation",
-        regex: /[[:punct:]]
+        regex: /[[:punct:]]/
       },
       { 
         script: :Adlam, 
