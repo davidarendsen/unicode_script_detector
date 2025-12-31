@@ -11,6 +11,11 @@ module UnicodeScriptDetector
         name: "Digit",
         regex: /\d/
       },
+      {
+        script: :Punctuation,
+        name: "Punctuation",
+        regex: /[[:punct:]]
+      },
       { 
         script: :Adlam, 
         name: "Adlam", 
