@@ -43,7 +43,7 @@ UnicodeScriptDetector.contains_only? "Helб🔥", [:Latin, :Cyrillic]
 
 ## Detect all the characters of a string, grouped by the script
 ```ruby
-detector = UnicodeScriptDetector::Detector.new("Hel6б how are you?")
+detector = UnicodeScriptDetector.script_groups("Hel6б how are you?")
 
 detector.script_groups.each do |group|
   puts "#{group.name}: #{group.text} (#{group.length} characters)"
