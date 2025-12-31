@@ -13,6 +13,25 @@ class UnicodeScriptDetector::DetectorTest < ActiveSupport::TestCase
     end
   end
 
+  test "detect latin and emoji script characters, but group them" do
+    script_groups = UnicodeScriptDetector.script_groups("test 🔥✅")
+
+    # First group should be Latin for "test"
+    assert_equal :Latin, script_groups[0].script
+    assert_equal "test", script_groups[0].text
+    assert_equal 4, script_groups[0].length
+
+    # Second group should be Whitespace for " "
+    assert_equal :Whitespace, script_groups[1].script
+    assert_equal " ", script_groups[1].text
+    assert_equal 1, script_groups[1].length
+
+    # Third group should be Emoji for "🔥✅"
+    assert_equal :Emoji, script_groups[2].script
+    assert_equal "🔥✅", script_groups[2].text
+    assert_equal 2, script_groups[2].length
+  end
+
   test "detect script contains latin" do
     assert UnicodeScriptDetector.contains?("H🔥ll✅", :Latin)
   end
