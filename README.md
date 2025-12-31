@@ -20,23 +20,47 @@ $ gem install unicode_script_detector
 UnicodeScriptDetector.detect_characters "Hel6б"
 
 #Output:
-[#<UnicodeScriptDetector::Character:0x00007768fefdead8 @char="H", @name="Latin", @script=:Latin>,
- #<UnicodeScriptDetector::Character:0x00007768fefdea10 @char="e", @name="Latin", @script=:Latin>,
- #<UnicodeScriptDetector::Character:0x00007768fefde970 @char="l", @name="Latin", @script=:Latin>,
- #<UnicodeScriptDetector::Character:0x00007768fefde8d0 @char="6", @name="Digit", @script=:Digit>,
- #<UnicodeScriptDetector::Character:0x00007768fefde830 @char="б", @name="Cyrillic", @script=:Cyrillic>]
+[
+  #<UnicodeScriptDetector::Character:0x00007768fefdead8 @char="H", @name="Latin", @script=:Latin>,
+  #<UnicodeScriptDetector::Character:0x00007768fefdea10 @char="e", @name="Latin", @script=:Latin>,
+  #<UnicodeScriptDetector::Character:0x00007768fefde970 @char="l", @name="Latin", @script=:Latin>,
+  #<UnicodeScriptDetector::Character:0x00007768fefde8d0 @char="6", @name="Digit", @script=:Digit>,
+  #<UnicodeScriptDetector::Character:0x00007768fefde830 @char="б", @name="Cyrillic", @script=:Cyrillic>
+]
 ```
 
 ## Detect if a script contains certain scripts
 ```ruby
 # This will return true because it contains Latin and Cyrillic
-UnicodeScriptDetector.contains? "Hellб🔥", [:Latin, :Cyrillic]
+UnicodeScriptDetector.contains? "Helб🔥", [:Latin, :Cyrillic]
 ```
 
 ## Detect if a script contains only certain scripts
 ```ruby
 # This will return false because it contains an Emoji as well
-UnicodeScriptDetector.contains_only? "Hellб🔥", [:Latin, :Cyrillic]
+UnicodeScriptDetector.contains_only? "Helб🔥", [:Latin, :Cyrillic]
+```
+
+## Detect all the characters of a string, grouped by the script
+```ruby
+detector = UnicodeScriptDetector::Detector.new("Hel6б how are you?")
+
+detector.script_groups.each do |group|
+  puts "#{group.name}: #{group.text} (#{group.length} characters)"
+end
+
+#Output:
+
+Latin: Hel (3 characters)
+Digit: 6 (1 characters)
+Cyrillic: б (1 characters)
+Whitespace:   (1 characters)
+Latin: how (3 characters)
+Whitespace:   (1 characters)
+Latin: are (3 characters)
+Whitespace:   (1 characters)
+Latin: you (3 characters)
+Punctuation: ? (1 characters)
 ```
 
 ## Development
