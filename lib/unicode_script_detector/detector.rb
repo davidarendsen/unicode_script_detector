@@ -41,5 +41,15 @@ module UnicodeScriptDetector
 
       @scripts.uniq.sort == scripts.uniq.sort
     end
+
+    def script_groups
+      @characters
+        .chunk { |char| char.script }
+        .map { |script, chars| ScriptGroup.new(script, chars) }
+    end
+
+    def grouped_scripts_hash
+      script_groups.map { |group| [group.script, group.text] }.to_h
+    end
   end
 end
