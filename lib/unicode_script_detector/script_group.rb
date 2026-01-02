@@ -1,19 +1,20 @@
 module UnicodeScriptDetector
   class ScriptGroup
-    attr_reader :script, :characters, :text
+    attr_reader :script, :text, :name
 
-    def initialize(script, characters)
+    def initialize(script, chars, name)
       @script = script
-      @characters = characters
-      @text = characters.map(&:char).join
+      @chars = chars
+      @text = chars.join
+      @name = name
     end
 
     def length
-      @characters.length
+      @chars.length
     end
 
-    def name
-      @characters.first&.name
+    def characters
+      @characters ||= @chars.map { |char| Character.new(char, @script, @name) }
     end
   end
 end
