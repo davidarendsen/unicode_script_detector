@@ -11,11 +11,6 @@ module UnicodeScriptDetector
         name: "Digit",
         regex: /\d/
       },
-      {
-        script: :Punctuation,
-        name: "Punctuation",
-        regex: /[[:punct:]]/
-      },
       { 
         script: :Adlam, 
         name: "Adlam", 
@@ -842,7 +837,12 @@ module UnicodeScriptDetector
       { 
         script: :Emoji, 
         name: "Emoji", 
-        regex: /\p{Emoji}/, 
+        regex: /\p{Emoji_Presentation}/, 
+      },
+      {
+        script: :Punctuation,
+        name: "Punctuation",
+        regex: /[[:punct:]]/
       },
       { 
         script: :Common, 
