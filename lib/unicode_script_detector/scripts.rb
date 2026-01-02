@@ -1,16 +1,6 @@
 module UnicodeScriptDetector
   class Scripts
     LIST = [
-      {
-        script: :Whitespace,
-        name: "Whitespace",
-        regex: /\s/
-      },
-      {
-        script: :Digit,
-        name: "Digit",
-        regex: /\d/
-      },
       { 
         script: :Adlam, 
         name: "Adlam", 
@@ -23,7 +13,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Anatolian_Hieroglyphs, 
-        name: "Anatolian_Hieroglyphs", 
+        name: "Anatolian Hieroglyphs", 
         regex: /\p{Anatolian_Hieroglyphs}/, 
       },
       { 
@@ -53,7 +43,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Bassa_Vah, 
-        name: "Bassa_Vah", 
+        name: "Bassa Vah", 
         regex: /\p{Bassa_Vah}/, 
       },
       { 
@@ -98,7 +88,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Canadian_Aboriginal, 
-        name: "Canadian_Aboriginal", 
+        name: "Canadian Aboriginal", 
         regex: /\p{Canadian_Aboriginal}/, 
       },
       { 
@@ -108,7 +98,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Caucasian_Albanian, 
-        name: "Caucasian_Albanian", 
+        name: "Caucasian Albanian", 
         regex: /\p{Caucasian_Albanian}/, 
       },
       { 
@@ -148,7 +138,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Cypro_Minoan, 
-        name: "Cypro_Minoan", 
+        name: "Cypro Minoan", 
         regex: /\p{Cypro_Minoan}/, 
       },
       { 
@@ -168,7 +158,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Dives_Akuru, 
-        name: "Dives_Akuru", 
+        name: "Dives Akuru", 
         regex: /\p{Dives_Akuru}/, 
       },
       { 
@@ -183,8 +173,8 @@ module UnicodeScriptDetector
       },
       { 
         script: :Egyptian_Hieroglyphs, 
-        name: "Egyptian_Hieroglyphs", 
-        regex: /\p{Egyptian_Hieroglyphs}/, 
+        name: "Egyptian Hieroglyphs", 
+        regex: /\p{Egyptian_Hieroglyphs}|[\u{13460}-\u{1355F}]/, 
       },
       { 
         script: :Elbasan, 
@@ -201,7 +191,11 @@ module UnicodeScriptDetector
         name: "Ethiopic", 
         regex: /\p{Ethiopic}/, 
       },
-    
+      { 
+        script: :Garay, 
+        name: "Garay", 
+        regex: /[\u{10D40}-\u{10D8F}]/,
+      },
       { 
         script: :Georgian, 
         name: "Georgian", 
@@ -234,7 +228,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Gunjala_Gondi, 
-        name: "Gunjala_Gondi", 
+        name: "Gunjala Gondi", 
         regex: /\p{Gunjala_Gondi}/, 
       },
       { 
@@ -242,11 +236,15 @@ module UnicodeScriptDetector
         name: "Gurmukhi", 
         regex: /\p{Gurmukhi}/, 
       },
-    
+      { 
+        script: :Gurung_Khema, 
+        name: "Gurung Khema", 
+        regex: /[\u{16100}-\u{1613F}]/,
+      },
       { 
         script: :Han, 
         name: "Han", 
-        regex: /\p{Han}/, 
+        regex: /\p{Han}|[\u{323B0}-\u{3347F}]/, 
       },
       { 
         script: :Hangul, 
@@ -255,7 +253,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Hanifi_Rohingya, 
-        name: "Hanifi_Rohingya", 
+        name: "Hanifi Rohingya", 
         regex: /\p{Hanifi_Rohingya}/, 
       },
       { 
@@ -280,7 +278,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Imperial_Aramaic, 
-        name: "Imperial_Aramaic", 
+        name: "Imperial Aramaic", 
         regex: /\p{Imperial_Aramaic}/, 
       },
       { 
@@ -290,12 +288,12 @@ module UnicodeScriptDetector
       },
       { 
         script: :Inscriptional_Pahlavi, 
-        name: "Inscriptional_Pahlavi", 
+        name: "Inscriptional Pahlavi", 
         regex: /\p{Inscriptional_Pahlavi}/, 
       },
       { 
         script: :Inscriptional_Parthian, 
-        name: "Inscriptional_Parthian", 
+        name: "Inscriptional Parthian", 
         regex: /\p{Inscriptional_Parthian}/, 
       },
       { 
@@ -318,7 +316,6 @@ module UnicodeScriptDetector
         name: "Katakana", 
         regex: /\p{Katakana}/, 
       },
-    
       { 
         script: :Kawi, 
         name: "Kawi", 
@@ -326,7 +323,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Kayah_Li, 
-        name: "Kayah_Li", 
+        name: "Kayah Li", 
         regex: /\p{Kayah_Li}/, 
       },
       { 
@@ -336,7 +333,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Khitan_Small_Script, 
-        name: "Khitan_Small_Script", 
+        name: "Khitan Small Script", 
         regex: /\p{Khitan_Small_Script}/, 
       },
       { 
@@ -354,7 +351,11 @@ module UnicodeScriptDetector
         name: "Khudawadi", 
         regex: /\p{Khudawadi}/, 
       },
-    
+      { 
+        script: :Kirat_Rai, 
+        name: "Kirat Rai", 
+        regex: /[\u{16D40}-\u{16D7F}]/,
+      },
       { 
         script: :Lao, 
         name: "Lao", 
@@ -377,12 +378,12 @@ module UnicodeScriptDetector
       },
       { 
         script: :Linear_A, 
-        name: "Linear_A", 
+        name: "Linear A", 
         regex: /\p{Linear_A}/, 
       },
       { 
         script: :Linear_B, 
-        name: "Linear_B", 
+        name: "Linear B", 
         regex: /\p{Linear_B}/, 
       },
       { 
@@ -432,7 +433,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Masaram_Gondi, 
-        name: "Masaram_Gondi", 
+        name: "Masaram Gondi", 
         regex: /\p{Masaram_Gondi}/, 
       },
       { 
@@ -442,22 +443,22 @@ module UnicodeScriptDetector
       },
       { 
         script: :Meetei_Mayek, 
-        name: "Meetei_Mayek", 
+        name: "Meetei Mayek", 
         regex: /\p{Meetei_Mayek}/, 
       },
       { 
         script: :Mende_Kikakui, 
-        name: "Mende_Kikakui", 
+        name: "Mende Kikakui", 
         regex: /\p{Mende_Kikakui}/, 
       },
       { 
         script: :Meroitic_Cursive, 
-        name: "Meroitic_Cursive", 
+        name: "Meroitic Cursive", 
         regex: /\p{Meroitic_Cursive}/, 
       },
       { 
         script: :Meroitic_Hieroglyphs, 
-        name: "Meroitic_Hieroglyphs", 
+        name: "Meroitic Hieroglyphs", 
         regex: /\p{Meroitic_Hieroglyphs}/, 
       },
       { 
@@ -488,7 +489,7 @@ module UnicodeScriptDetector
       { 
         script: :Myanmar, 
         name: "Myanmar", 
-        regex: /\p{Myanmar}/, 
+        regex: /\p{Myanmar}|[\u{116D0}-\u{116FF}]/, 
       },
       { 
         script: :Nabataean, 
@@ -497,7 +498,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Nag_Mundari, 
-        name: "Nag_Mundari", 
+        name: "Nag Mundari", 
         regex: /\p{Nag_Mundari}/, 
       },
       { 
@@ -507,7 +508,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :New_Tai_Lue, 
-        name: "New_Tai_Lue", 
+        name: "New Tai Lue", 
         regex: /\p{New_Tai_Lue}/, 
       },
       { 
@@ -527,7 +528,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Nyiakeng_Puachue_Hmong, 
-        name: "Nyiakeng_Puachue_Hmong", 
+        name: "Nyiakeng Puachue Hmong", 
         regex: /\p{Nyiakeng_Puachue_Hmong}/, 
       },
       { 
@@ -537,53 +538,57 @@ module UnicodeScriptDetector
       },
       { 
         script: :Ol_Chiki, 
-        name: "Ol_Chiki", 
+        name: "Ol Chiki", 
         regex: /\p{Ol_Chiki}/, 
       },
-    
+      { 
+        script: :Ol_Onal, 
+        name: "Ol Onal", 
+        regex: /[\u{1E5D0}-\u{1E5FF}]/,
+      },
       { 
         script: :Old_Hungarian, 
-        name: "Old_Hungarian", 
+        name: "Old Hungarian", 
         regex: /\p{Old_Hungarian}/, 
       },
       { 
         script: :Old_Italic, 
-        name: "Old_Italic", 
+        name: "Old Italic", 
         regex: /\p{Old_Italic}/, 
       },
       { 
         script: :Old_North_Arabian, 
-        name: "Old_North_Arabian", 
+        name: "Old North Arabian", 
         regex: /\p{Old_North_Arabian}/, 
       },
       { 
         script: :Old_Permic, 
-        name: "Old_Permic", 
+        name: "Old Permic", 
         regex: /\p{Old_Permic}/, 
       },
       { 
         script: :Old_Persian, 
-        name: "Old_Persian", 
+        name: "Old Persian", 
         regex: /\p{Old_Persian}/, 
       },
       { 
         script: :Old_Sogdian, 
-        name: "Old_Sogdian", 
+        name: "Old Sogdian", 
         regex: /\p{Old_Sogdian}/, 
       },
       { 
         script: :Old_South_Arabian, 
-        name: "Old_South_Arabian", 
+        name: "Old South Arabian", 
         regex: /\p{Old_South_Arabian}/, 
       },
       { 
         script: :Old_Turkic, 
-        name: "Old_Turkic", 
+        name: "Old Turkic", 
         regex: /\p{Old_Turkic}/, 
       },
       { 
         script: :Old_Uyghur, 
-        name: "Old_Uyghur", 
+        name: "Old Uyghur", 
         regex: /\p{Old_Uyghur}/, 
       },
       { 
@@ -603,7 +608,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Pahawh_Hmong, 
-        name: "Pahawh_Hmong", 
+        name: "Pahawh Hmong", 
         regex: /\p{Pahawh_Hmong}/, 
       },
       { 
@@ -613,12 +618,12 @@ module UnicodeScriptDetector
       },
       { 
         script: :Pau_Cin_Hau, 
-        name: "Pau_Cin_Hau", 
+        name: "Pau Cin Hau", 
         regex: /\p{Pau_Cin_Hau}/, 
       },
       { 
         script: :Phags_Pa, 
-        name: "Phags_Pa", 
+        name: "Phags Pa", 
         regex: /\p{Phags_Pa}/, 
       },
       { 
@@ -628,7 +633,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Psalter_Pahlavi, 
-        name: "Psalter_Pahlavi", 
+        name: "Psalter Pahlavi", 
         regex: /\p{Psalter_Pahlavi}/, 
       },
       { 
@@ -654,7 +659,7 @@ module UnicodeScriptDetector
       { 
         script: :Sharada, 
         name: "Sharada", 
-        regex: /\p{Sharada}/, 
+        regex: /\p{Sharada}|[\u{11B60}-\u{11B7F}]/, 
       },
       { 
         script: :Shavian, 
@@ -665,6 +670,11 @@ module UnicodeScriptDetector
         script: :Siddham, 
         name: "Siddham", 
         regex: /\p{Siddham}/, 
+      },
+      {
+        script: :Sidetic,
+        name: "Sidetic",
+        regex: /[\u{10940}-\u{1095F}]/
       },
       { 
         script: :SignWriting, 
@@ -683,7 +693,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Sora_Sompeng, 
-        name: "Sora_Sompeng", 
+        name: "Sora Sompeng", 
         regex: /\p{Sora_Sompeng}/, 
       },
       { 
@@ -696,10 +706,14 @@ module UnicodeScriptDetector
         name: "Sundanese", 
         regex: /\p{Sundanese}/, 
       },
-    
+      { 
+        script: :Sunuwar, 
+        name: "Sunuwar", 
+        regex: /[\u{11BC0}-\u{11BFF}]/,
+      },
       { 
         script: :Syloti_Nagri, 
-        name: "Syloti_Nagri", 
+        name: "Syloti Nagri", 
         regex: /\p{Syloti_Nagri}/, 
       },
       { 
@@ -719,18 +733,23 @@ module UnicodeScriptDetector
       },
       { 
         script: :Tai_Le, 
-        name: "Tai_Le", 
+        name: "Tai Le", 
         regex: /\p{Tai_Le}/, 
       },
       { 
         script: :Tai_Tham, 
-        name: "Tai_Tham", 
+        name: "Tai Tham", 
         regex: /\p{Tai_Tham}/, 
       },
       { 
         script: :Tai_Viet, 
-        name: "Tai_Viet", 
+        name: "Tai Viet", 
         regex: /\p{Tai_Viet}/, 
+      },
+      { 
+        script: :Tai_Yo, 
+        name: "Tai Yo", 
+        regex: /[\u{1E6C0}-\u{1E6FF}]/,
       },
       { 
         script: :Takri, 
@@ -750,7 +769,7 @@ module UnicodeScriptDetector
       { 
         script: :Tangut, 
         name: "Tangut", 
-        regex: /\p{Tangut}/, 
+        regex: /\p{Tangut}|[\u{18D80}-\u{18DFF}]/, 
       },
       { 
         script: :Telugu, 
@@ -782,13 +801,26 @@ module UnicodeScriptDetector
         name: "Tirhuta", 
         regex: /\p{Tirhuta}/, 
       },
-    
+      { 
+        script: :Todhri, 
+        name: "Todhri", 
+        regex: /[\u{105C0}-\u{105FF}]/,
+      },
+      { 
+        script: :Tolong_Siki, 
+        name: "Tolong Siki", 
+        regex: /[\u{11DB0}-\u{11DEF}]/,
+      },
       { 
         script: :Toto, 
         name: "Toto", 
         regex: /\p{Toto}/, 
       },
-    
+      { 
+        script: :Tulu_Tigalari, 
+        name: "Tulu Tigalari", 
+        regex: /[\u{11380}-\u{113FF}]/,
+      },
       { 
         script: :Ugaritic, 
         name: "Ugaritic", 
@@ -816,7 +848,7 @@ module UnicodeScriptDetector
       },
       { 
         script: :Warang_Citi, 
-        name: "Warang_Citi", 
+        name: "Warang Citi", 
         regex: /\p{Warang_Citi}/, 
       },
       { 
@@ -831,8 +863,20 @@ module UnicodeScriptDetector
       },
       { 
         script: :Zanabazar_Square, 
-        name: "Zanabazar_Square", 
+        name: "Zanabazar Square", 
         regex: /\p{Zanabazar_Square}/, 
+      },
+
+      #Special characters
+      {
+        script: :Whitespace,
+        name: "Whitespace",
+        regex: /\s/
+      },
+      {
+        script: :Digit,
+        name: "Digit",
+        regex: /\d/
       },
       { 
         script: :Emoji, 
@@ -847,7 +891,7 @@ module UnicodeScriptDetector
       { 
         script: :Common, 
         name: "Common", 
-        regex: /\p{Common}/, 
+        regex: /\p{Common}|[\u{1CEC0}-\u{1CEFF}]|[\u{1CC00}-\u{1CEBF}]/, 
       },
     ]
   end
