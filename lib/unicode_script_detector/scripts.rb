@@ -869,14 +869,24 @@ module UnicodeScriptDetector
 
       #Special characters
       {
+        script: :New_Line,
+        name: "New Line",
+        regex: /\n/,
+      },
+      {
+        script: :Tab,
+        name: "Tab",
+        regex: /\t/,
+      },
+      {
         script: :Whitespace,
         name: "Whitespace",
-        regex: /\s/
+        regex: /\s/,
       },
       {
         script: :Digit,
         name: "Digit",
-        regex: /\d/
+        regex: /\d/,
       },
       { 
         script: :Emoji, 
@@ -886,7 +896,7 @@ module UnicodeScriptDetector
       {
         script: :Punctuation,
         name: "Punctuation",
-        regex: /[[:punct:]]/
+        regex: /[[:punct:]]/,
       },
       { 
         script: :Common, 

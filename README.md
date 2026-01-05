@@ -17,7 +17,7 @@ $ gem install unicode_script_detector
 
 ## Detect all the characters of a string
 ```ruby
-UnicodeScriptDetector.detect_characters "Hel6б"
+UnicodeScriptDetector.detect_characters "Hel6б\t"
 
 #Output:
 [
@@ -25,7 +25,8 @@ UnicodeScriptDetector.detect_characters "Hel6б"
   #<UnicodeScriptDetector::Character:0x00007768fefdea10 @char="e", @name="Latin", @script=:Latin>,
   #<UnicodeScriptDetector::Character:0x00007768fefde970 @char="l", @name="Latin", @script=:Latin>,
   #<UnicodeScriptDetector::Character:0x00007768fefde8d0 @char="6", @name="Digit", @script=:Digit>,
-  #<UnicodeScriptDetector::Character:0x00007768fefde830 @char="б", @name="Cyrillic", @script=:Cyrillic>
+  #<UnicodeScriptDetector::Character:0x00007768fefde830 @char="б", @name="Cyrillic", @script=:Cyrillic>,
+  #<UnicodeScriptDetector::Character:0x00007768fefde830 @char="\t", @name="Tab", @script=:Tab>
 ]
 ```
 
