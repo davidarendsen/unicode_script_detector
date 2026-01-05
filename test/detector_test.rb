@@ -210,9 +210,17 @@ class UnicodeScriptDetector::DetectorTest < ActiveSupport::TestCase
     assert UnicodeScriptDetector.contains_only?("𐤄𐤈𐤀", :Phoenician)
   end
 
+  test "detect script contains a new line" do
+    assert UnicodeScriptDetector.contains_only? "this\ncontains a new line", [:New_Line, :Latin, :Whitespace]
+  end
+
+  test "detect script contains a tab" do
+    assert UnicodeScriptDetector.contains_only? "this\tcontains a tab", [:Tab, :Latin, :Whitespace]
+  end
+
   # Complex grouping tests with multiple scripts
   test "detect and group multilingual text" do
-    script_groups = UnicodeScriptDetector.script_groups("Hello नमस्ते 你好 🌍")
+    script_groups = UnicodeScriptDetector.script_groups("Hello नमस्ते 你好\t🌍")
 
     assert_equal :Latin, script_groups[0].script
     assert_equal "Hello", script_groups[0].text
@@ -229,8 +237,7 @@ class UnicodeScriptDetector::DetectorTest < ActiveSupport::TestCase
     assert_equal :Han, script_groups[4].script
     assert_equal "你好", script_groups[4].text
 
-    assert_equal :Whitespace, script_groups[5].script
-    assert_equal " ", script_groups[5].text
+    assert_equal :Tab, script_groups[5].script
 
     assert_equal :Emoji, script_groups[6].script
     assert_equal "🌍", script_groups[6].text
