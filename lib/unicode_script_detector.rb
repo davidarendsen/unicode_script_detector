@@ -20,5 +20,13 @@ module UnicodeScriptDetector
     def contains_only?(string, scripts)
       UnicodeScriptDetector::Detector.new(string).contains_only?(scripts)
     end
+
+    def spoof_analysis(string)
+      UnicodeScriptDetector::SpoofDetector.new(string).detections
+    end
+
+    def spoofed?(string)
+      UnicodeScriptDetector::SpoofDetector.new(string).spoofed?
+    end
   end
 end
