@@ -29,15 +29,15 @@ class UnicodeScriptDetector::SpoofDetectorTest < ActiveSupport::TestCase
   end
 
   test 'detects armenian confusable characters' do
-    detector = UnicodeScriptDetector::SpoofDetector.new('զero') # զ is Armenian
+    detector = UnicodeScriptDetector::SpoofDetector.new('օrder') # օ is Armenian
     assert detector.spoofed?
-    assert_equal 'z', detector.confusables.first.characters.first.looks_like
+    assert_equal 'o', detector.confusables.first.characters.first.looks_like
   end
 
   test 'detects georgian confusable characters' do
-    detector = UnicodeScriptDetector::SpoofDetector.new('იcon') # ი is Georgian
+    detector = UnicodeScriptDetector::SpoofDetector.new('ყes') # ყ is Georgian
     assert detector.spoofed?
-    assert_equal 'i', detector.confusables.first.characters.first.looks_like
+    assert_equal 'y', detector.confusables.first.characters.first.looks_like
   end
 
   test 'detects hebrew confusable characters' do
