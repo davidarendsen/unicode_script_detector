@@ -1,6 +1,19 @@
 require "rake/testtask"
 require "net/http"
 require "uri"
+require "openssl"
+
+def fetch_unicode(url)
+  uri = URI(url)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = true
+  if ENV["SKIP_SSL_VERIFY"]
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    puts "⚠️  SSL verification disabled (SKIP_SSL_VERIFY set)"
+  end
+  request = Net::HTTP::Get.new(uri.request_uri)
+  http.request(request)
+end
 
 Rake::TestTask.new do |t|
   t.libs << "lib"
@@ -16,8 +29,7 @@ task :validate_confusables do
   require_relative "lib/unicode_script_detector/confusables"
 
   puts "Fetching latest Unicode confusables..."
-  uri = URI("https://unicode.org/Public/security/latest/confusables.txt")
-  response = Net::HTTP.get_response(uri)
+  response = fetch_unicode("https://unicode.org/Public/security/latest/confusables.txt")
 
   unless response.is_a?(Net::HTTPSuccess)
     abort "Failed to fetch confusables.txt: #{response.code} #{response.message}"
@@ -125,8 +137,7 @@ task :update_confusables do
   require "set"
 
   puts "Fetching latest Unicode confusables..."
-  uri = URI("https://unicode.org/Public/security/latest/confusables.txt")
-  response = Net::HTTP.get_response(uri)
+  response = fetch_unicode("https://unicode.org/Public/security/latest/confusables.txt")
 
   unless response.is_a?(Net::HTTPSuccess)
     abort "Failed to fetch confusables.txt: #{response.code} #{response.message}"
