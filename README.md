@@ -93,6 +93,7 @@ UnicodeScriptDetector.spoofed? "Раypal"
 ## Development
 Start the console with `bin/console`.
 Run the tests with `bin/test`.
+Update confusables list from unicode.org with `rake update_confusables`
 
 ## Contributing
 You're welcome to contribute to this project. See https://github.com/davidarendsen/unicode_script_detector.
