@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
 
-  spec.required_ruby_version = '>= 3.1.0'
+  spec.required_ruby_version = '>= 3.2.0'
 
   spec.add_dependency "zeitwerk", "~> 2.6"
   spec.add_dependency "activesupport", ">= 7.2.2", "< 9.0"
