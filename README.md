@@ -84,16 +84,16 @@ UnicodeScriptDetector.spoof_analysis "Раypal"
 ]
 ```
 
-# Check whether a homograph spoof is detected
+## Check whether a homograph spoof is detected
 ```ruby
 UnicodeScriptDetector.spoofed? "Раypal"
 => true
 ```
 
 ## Development
-Start the console with `bin/console`.
-Run the tests with `bin/test`.
-Update confusables list from unicode.org with `rake update_confusables`
+- Start the console with `bin/console`.
+- Run the tests with `bin/test`.
+- Update confusables list from unicode.org with `rake update_confusables`
 
 ## Contributing
 You're welcome to contribute to this project. See https://github.com/davidarendsen/unicode_script_detector.
