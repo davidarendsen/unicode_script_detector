@@ -64,18 +64,30 @@ Punctuation: ? (1 characters)
 
 ## Get a homographic spoof analysis
 ```ruby
-UnicodeScriptDetector.spoof_analysis "օrder"
+UnicodeScriptDetector.spoof_analysis "Раypal"
 =>
-[#<struct UnicodeScriptDetector::SpoofDetector::Detection
+[
+  #<struct UnicodeScriptDetector::SpoofDetector::Detection
   type=:confusable,
-  message="Found 1 character(s) from non-Latin scripts that visually resemble Latin letters",
-  characters=[#<struct UnicodeScriptDetector::SpoofDetector::ConfusableChar char="օ", script="Armenian", looks_like="o", position=0>],
+  message="Found 2 character(s) from non-Latin scripts that visually resemble Latin letters",
+  characters=[
+    #<struct UnicodeScriptDetector::SpoofDetector::ConfusableChar char="Р", script="Cyrillic", looks_like="P", position=0>,
+    #<struct UnicodeScriptDetector::SpoofDetector::ConfusableChar char="а", script="Cyrillic", looks_like="a", position=1>
+  ],
   severity=:high>,
- #<struct UnicodeScriptDetector::SpoofDetector::Detection
+  
+  #<struct UnicodeScriptDetector::SpoofDetector::Detection
   type=:mixed_scripts,
-  message="Text contains a mix of 2 scripts: Armenian, Latin",
-  characters=["Armenian", "Latin"],
-  severity=:medium>]
+  message="Text contains a mix of 2 scripts: Cyrillic, Latin",
+  characters=["Cyrillic", "Latin"],
+  severity=:medium>
+]
+```
+
+# Check whether a homograph spoof is detected
+```ruby
+UnicodeScriptDetector.spoofed? "Раypal"
+=> true
 ```
 
 ## Development
