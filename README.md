@@ -62,9 +62,38 @@ Latin: you (3 characters)
 Punctuation: ? (1 characters)
 ```
 
+## Get a homographic spoof analysis
+```ruby
+UnicodeScriptDetector.spoof_analysis "Раypal"
+=>
+[
+  #<struct UnicodeScriptDetector::SpoofDetector::Detection
+  type=:confusable,
+  message="Found 2 character(s) from non-Latin scripts that visually resemble Latin letters",
+  characters=[
+    #<struct UnicodeScriptDetector::SpoofDetector::ConfusableChar char="Р", script="Cyrillic", looks_like="P", position=0>,
+    #<struct UnicodeScriptDetector::SpoofDetector::ConfusableChar char="а", script="Cyrillic", looks_like="a", position=1>
+  ],
+  severity=:high>,
+  
+  #<struct UnicodeScriptDetector::SpoofDetector::Detection
+  type=:mixed_scripts,
+  message="Text contains a mix of 2 scripts: Cyrillic, Latin",
+  characters=["Cyrillic", "Latin"],
+  severity=:medium>
+]
+```
+
+# Check whether a homograph spoof is detected
+```ruby
+UnicodeScriptDetector.spoofed? "Раypal"
+=> true
+```
+
 ## Development
 Start the console with `bin/console`.
 Run the tests with `bin/test`.
+Update confusables list from unicode.org with `rake update_confusables`
 
 ## Contributing
 You're welcome to contribute to this project. See https://github.com/davidarendsen/unicode_script_detector.

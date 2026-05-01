@@ -1,4 +1,5 @@
 require "bundler/setup"
+require "active_support"
 require "minitest/reporters"
 require "unicode_script_detector"
 
