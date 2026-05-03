@@ -122,6 +122,13 @@ module UnicodeScriptDetector
       )
     end
 
+    # Detects mixed scripts using Unicode TR #39's mixed-script detection as
+    # the primary check, then applies our SAFE_SCRIPT_COMBINATIONS whitelist
+    # which implements the "Moderately Restrictive" level. This allows
+    # legitimate multilingual text (Latin+CJK) while flagging suspicious
+    # combinations like Latin+Cyrillic.
+    #
+    # See: https://unicode.org/reports/tr39/#Mixed_Script_Detection
     def detect_mixed_scripts
       return nil unless Unicode::Scripts.mixed?(string)
 
@@ -132,7 +139,7 @@ module UnicodeScriptDetector
 
       script_set = scripts.to_set
 
-      # Check if it's a known safe combination (backward compatibility)
+      # Check against Unicode TR #39 Moderately Restrictive safe combinations
       return nil if Confusables::SAFE_SCRIPT_COMBINATIONS.any? { |safe| script_set.subset?(safe) }
 
       Detection.new(

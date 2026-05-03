@@ -147,16 +147,23 @@ module UnicodeScriptDetector
       "\u202E" # Right-to-left override
     ].freeze
 
+    # SAFE_SCRIPT_COMBINATIONS defines which script combinations are considered
+    # safe (not suspicious) when mixed together. This implements Unicode TR #39's
+    # "Moderately Restrictive" level, which is the recommended default for
+    # general-purpose use. It allows legitimate multilingual text (e.g. Latin+CJK)
+    # while still flagging potentially spoofed text (e.g. Latin+Cyrillic).
+    #
+    # See: https://unicode.org/reports/tr39/#Restriction_Level_Detection
     SAFE_SCRIPT_COMBINATIONS = [
-      Set[:Latin, :Han, :Hiragana, :Katakana],
-      Set[:Latin, :Han, :Bopomofo],
-      Set[:Latin, :Han, :Hangul],
-      Set[:Hiragana, :Katakana, :Han],
-      Set[:Latin, :Inherited],
-      Set[:Latin, :Common],
-      Set[:Latin, :Punctuation],
-      Set[:Latin, :Digit],
-      Set[:Latin, :Whitespace]
+      Set[:Latin, :Han, :Hiragana, :Katakana],  # Japanese + Latin
+      Set[:Latin, :Han, :Bopomofo],              # Chinese (Bopomofo) + Latin
+      Set[:Latin, :Han, :Hangul],                # Korean + Latin
+      Set[:Hiragana, :Katakana, :Han],           # Japanese only
+      Set[:Latin, :Inherited],                   # Latin with diacritics
+      Set[:Latin, :Common],                      # Latin with common chars
+      Set[:Latin, :Punctuation],                 # Latin with punctuation
+      Set[:Latin, :Digit],                       # Latin with digits
+      Set[:Latin, :Whitespace]                   # Latin with whitespace
     ].freeze
 
     def self.confusable?(char)
