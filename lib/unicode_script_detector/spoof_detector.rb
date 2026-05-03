@@ -23,9 +23,11 @@ module UnicodeScriptDetector
       ].compact
     end
 
-    # Returns true if any spoofing is detected
+    # Returns true if actual spoofing is detected (confusables, invisible
+    # characters, or directional overrides). Mixed scripts alone are not
+    # considered spoofing — they may just be multilingual text.
     def spoofed?
-      detections.any?
+      detections.any? { |d| [:confusable, :invisible, :directional_override].include?(d.type) }
     end
 
     # Returns only confusable character detections
