@@ -282,4 +282,38 @@ class UnicodeScriptDetector::DetectorTest < ActiveSupport::TestCase
     text = "é".unicode_normalize(:nfd)  # Normalize to decomposed form
     assert UnicodeScriptDetector.contains?(text, [:Latin, :Inherited])
   end
+
+  # Script_Extensions tests
+  test "script_extensions for simple latin text" do
+    groups = UnicodeScriptDetector.script_groups("hello")
+    assert_equal [:Latin], groups.first.script_extensions
+  end
+
+  test "script_extensions for common punctuation with multiple extensions" do
+    groups = UnicodeScriptDetector.script_groups("॥")
+    assert_equal :Punctuation, groups.first.script
+    assert groups.first.script_extensions.include?(:Devanagari)
+    assert groups.first.script_extensions.include?(:Bengali)
+    assert groups.first.script_extensions.length > 1
+  end
+
+  test "script_extensions for inherited combining character" do
+    text = "é".unicode_normalize(:nfd)
+    groups = UnicodeScriptDetector.script_groups(text)
+    # The combining acute accent should have multiple script extensions
+    accent_group = groups.find { |g| g.script == :Inherited }
+    assert accent_group, "Expected an Inherited group"
+    assert accent_group.script_extensions.length > 1
+    assert accent_group.script_extensions.include?(:Latin)
+  end
+
+  test "script_extensions is empty array by default for backward compatibility" do
+    group = UnicodeScriptDetector::ScriptGroup.new(:Latin, ["a"], "Latin")
+    assert_equal [], group.script_extensions
+  end
+
+  test "script_extensions accessible on ScriptGroup" do
+    groups = UnicodeScriptDetector.script_groups("abc")
+    assert_respond_to groups.first, :script_extensions
+  end
 end

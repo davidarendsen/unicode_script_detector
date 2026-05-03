@@ -123,6 +123,8 @@ module UnicodeScriptDetector
     end
 
     def detect_mixed_scripts
+      return nil unless Unicode::Scripts.mixed?(string)
+
       detector = Detector.new(string)
       scripts = detector.scripts.reject { |s| ignored_script?(s) }
 
@@ -130,7 +132,7 @@ module UnicodeScriptDetector
 
       script_set = scripts.to_set
 
-      # Check if it's a known safe combination
+      # Check if it's a known safe combination (backward compatibility)
       return nil if Confusables::SAFE_SCRIPT_COMBINATIONS.any? { |safe| script_set.subset?(safe) }
 
       Detection.new(
@@ -142,14 +144,12 @@ module UnicodeScriptDetector
     end
 
     def detect_script_for_char(char)
-      Scripts::LIST.each do |script_data|
-        return script_data if char.match?(script_data[:regex])
-      end
-      { script: :Other, name: "Other" }
+      script_name = Unicode::Scripts.scripts(char).first
+      { script: script_name.to_sym, name: script_name }
     end
 
     def ignored_script?(script)
-      %i[Common Inherited Whitespace Punctuation Digit New_Line Tab].include?(script)
+      %i[Common Inherited Whitespace Punctuation Digit New_Line Tab Emoji].include?(script)
     end
 
     def invisible_char_name(char)
