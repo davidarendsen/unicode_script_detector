@@ -33,7 +33,8 @@ module UnicodeScriptDetector
           chars = char_data.map(&:first)
           name = char_data.first[2]
           extensions = char_data.map(&:last).flatten.uniq
-          ScriptGroup.new(script, chars, name, extensions)
+          char_extensions = char_data.map(&:last)
+          ScriptGroup.new(script, chars, name, extensions, char_extensions)
         end
     end
 
