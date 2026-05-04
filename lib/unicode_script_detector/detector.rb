@@ -89,7 +89,7 @@ module UnicodeScriptDetector
         elsif char =~ /^\s$/
           { script: :Whitespace, name: "Whitespace", script_extensions: [:Whitespace] }
         elsif char =~ /^\d$/
-          { script: :Digit, name: "Digit", script_extensions: [:Digit] }
+          { script: :Digit, name: "Digit", script_extensions: Unicode::Scripts.augmented_scripts(char).map(&:to_sym) }
         elsif char =~ /^\p{Emoji_Presentation}$/
           { script: :Emoji, name: "Emoji", script_extensions: [:Emoji] }
         else
@@ -100,11 +100,18 @@ module UnicodeScriptDetector
       def fallback_common_script(char, extensions)
         # For characters unicode-scripts returns as "Common",
         # check if they match our custom fallback categories.
-        # Preserve the actual Script_Extensions from unicode-scripts.
-        if char =~ /^[[:punct:]]$/
-          { script: :Punctuation, name: "Punctuation", script_extensions: extensions }
+        # When unicode-scripts only returns ["Common"] for extensions,
+        # use augmented_scripts to get all scripts that accept this character.
+        all_extensions = if extensions == [:Common]
+          Unicode::Scripts.augmented_scripts(char).map(&:to_sym)
         else
-          { script: :Common, name: "Common", script_extensions: extensions }
+          extensions
+        end
+
+        if char =~ /^[[:punct:]]$/
+          { script: :Punctuation, name: "Punctuation", script_extensions: all_extensions }
+        else
+          { script: :Common, name: "Common", script_extensions: all_extensions }
         end
       end
   end
