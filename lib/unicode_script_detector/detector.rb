@@ -90,7 +90,13 @@ module UnicodeScriptDetector
         elsif char =~ /^\s$/
           { script: :Whitespace, name: "Whitespace", script_extensions: [:Whitespace] }
         elsif char =~ /^\d$/
-          { script: :Digit, name: "Digit", script_extensions: Unicode::Scripts.augmented_scripts(char).map(&:to_sym) }
+          require 'unicode/scripts/index' unless defined?(::Unicode::Scripts::INDEX)
+          digit_extensions = Unicode::Scripts.augmented_scripts(char).filter_map { |short|
+            idx = ::Unicode::Scripts::INDEX[:SCRIPT_ALIASES][short]
+            next short.to_sym unless idx
+            ::Unicode::Scripts::INDEX[:SCRIPT_NAMES][idx]&.to_sym
+          }
+          { script: :Digit, name: "Digit", script_extensions: digit_extensions }
         elsif char =~ /^\p{Emoji_Presentation}$/
           { script: :Emoji, name: "Emoji", script_extensions: [:Emoji] }
         else
@@ -104,7 +110,12 @@ module UnicodeScriptDetector
         # When unicode-scripts only returns ["Common"] for extensions,
         # use augmented_scripts to get all scripts that accept this character.
         all_extensions = if extensions == [:Common]
-          Unicode::Scripts.augmented_scripts(char).map(&:to_sym)
+          require 'unicode/scripts/index' unless defined?(::Unicode::Scripts::INDEX)
+          Unicode::Scripts.augmented_scripts(char).filter_map { |short|
+            idx = ::Unicode::Scripts::INDEX[:SCRIPT_ALIASES][short]
+            next short.to_sym unless idx
+            ::Unicode::Scripts::INDEX[:SCRIPT_NAMES][idx]&.to_sym
+          }
         else
           extensions
         end
