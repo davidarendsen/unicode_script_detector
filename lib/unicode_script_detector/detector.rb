@@ -84,21 +84,15 @@ module UnicodeScriptDetector
         # Check custom categories first (preserve backward compatibility)
         # These are categories that unicode-scripts returns as "Common"
         if char == "\t"
-          { script: :Tab, name: "Tab", script_extensions: [:Tab] }
+          { script: :Tab, name: "Tab", script_extensions: [:Common] }
         elsif char == "\n" || char == "\r"
-          { script: :New_Line, name: "New Line", script_extensions: [:New_Line] }
+          { script: :New_Line, name: "New Line", script_extensions: [:Common] }
         elsif char =~ /^\s$/
-          { script: :Whitespace, name: "Whitespace", script_extensions: [:Whitespace] }
+          { script: :Whitespace, name: "Whitespace", script_extensions: [:Common] }
         elsif char =~ /^\d$/
-          require 'unicode/scripts/index' unless defined?(::Unicode::Scripts::INDEX)
-          digit_extensions = Unicode::Scripts.augmented_scripts(char).filter_map { |short|
-            idx = ::Unicode::Scripts::INDEX[:SCRIPT_ALIASES][short]
-            next short.to_sym unless idx
-            ::Unicode::Scripts::INDEX[:SCRIPT_NAMES][idx]&.to_sym
-          }
-          { script: :Digit, name: "Digit", script_extensions: digit_extensions }
+          { script: :Digit, name: "Digit", script_extensions: [:Common] }
         elsif char =~ /^\p{Emoji_Presentation}$/
-          { script: :Emoji, name: "Emoji", script_extensions: [:Emoji] }
+          { script: :Emoji, name: "Emoji", script_extensions: [:Common] }
         else
           nil
         end
@@ -106,24 +100,11 @@ module UnicodeScriptDetector
 
       def fallback_common_script(char, extensions)
         # For characters unicode-scripts returns as "Common",
-        # check if they match our custom fallback categories.
-        # When unicode-scripts only returns ["Common"] for extensions,
-        # use augmented_scripts to get all scripts that accept this character.
-        all_extensions = if extensions == [:Common]
-          require 'unicode/scripts/index' unless defined?(::Unicode::Scripts::INDEX)
-          Unicode::Scripts.augmented_scripts(char).filter_map { |short|
-            idx = ::Unicode::Scripts::INDEX[:SCRIPT_ALIASES][short]
-            next short.to_sym unless idx
-            ::Unicode::Scripts::INDEX[:SCRIPT_NAMES][idx]&.to_sym
-          }
-        else
-          extensions
-        end
-
+        # apply fallback categories (Punctuation or Common).
         if char =~ /^[[:punct:]]$/
-          { script: :Punctuation, name: "Punctuation", script_extensions: all_extensions }
+          { script: :Punctuation, name: "Punctuation", script_extensions: extensions }
         else
-          { script: :Common, name: "Common", script_extensions: all_extensions }
+          { script: :Common, name: "Common", script_extensions: extensions }
         end
       end
   end
